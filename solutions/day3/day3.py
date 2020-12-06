@@ -9,7 +9,7 @@ for i, row in enumerate(terrain):
     if row[(i*3) % len(row)] == '#':
        trees += 1
 
-print(trees)
+print(f'total trees for first slope: {trees}')
 
 # PART 2
 
@@ -24,4 +24,4 @@ def find_trees(right, down):
     return trees
 
 total_trees = find_trees(1, 1) * find_trees(3, 1) * find_trees(5, 1) * find_trees(7, 1) * find_trees(1, 2)
-print(total_trees)
+print(f'total trees for all slopes: {total_trees}')
