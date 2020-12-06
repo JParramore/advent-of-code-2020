@@ -3,32 +3,25 @@ with open('input.txt') as input:
 
 def get_row(row_id):
     rows = [i for i, x in enumerate(range(128))]
+
     for char in row_id:
-        if char == 'F':
-            rows = rows[:int(len(rows)/2)]
-        else:
-            rows = rows[int(len(rows)/2):]
+        rows = rows[:int(len(rows)/2)] if char == 'F' else rows[int(len(rows)/2):]
 
     return rows[0]
 
 
 def get_col(col_id):
     cols = [i for i, x in enumerate(range(8))]
+
     for char in col_id:
-        if char == 'L':
-            cols = cols[:int(len(cols)/2)]
-        else:
-            cols = cols[int(len(cols)/2):
-            ]
+        cols = cols[:int(len(cols)/2)] if char == 'L' else cols[int(len(cols)/2):]
+    
     return cols[0]
 
 
 def get_seat_id(boarding_pass):
-    row_instruction = boarding_pass[:7]
-    col_instruction = boarding_pass[-3:]
-
-    row = get_row(row_instruction)
-    col = get_col(col_instruction)
+    row = get_row(boarding_pass[:7])
+    col = get_col(boarding_pass[-3:])
 
     return row * 8 + col
 
@@ -38,8 +31,7 @@ def highest_seat_id(passes):
     highest_seat_id = 0
     for boarding_pass in passes:
         seat_id = get_seat_id(boarding_pass)
-        if seat_id > highest_seat_id:
-            highest_seat_id = seat_id
+        highest_seat_id = max(highest_seat_id, seat_id)
 
     return highest_seat_id
 
@@ -48,11 +40,9 @@ def highest_seat_id(passes):
 def find_missing_id(passes):
 
     occupied = []
-
-    for boarding_pass in passes:
-        occupied.append(get_seat_id(boarding_pass))
-
+    [ occupied.append(get_seat_id(boarding_pass)) for boarding_pass in passes ]
     occupied.sort()
+
     first_seat = occupied[0]
 
     for i, seat in enumerate(occupied):
