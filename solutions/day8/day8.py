@@ -12,7 +12,7 @@ def is_valid_instructions(instructions):
     while i not in visited:
         if i == len(instructions):
             valid = True
-            print('program reached terminated successfully')
+            print('program terminated successfully')
             return valid, acc
 
         if i > len(instructions):
