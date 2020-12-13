@@ -45,7 +45,8 @@ def count_individual_bags(bags, target):
     total_contained = 1
 
     for bag in bags[target]:
-        total_contained += bags[target][bag] * count_individual_bags(bags, bag)
+        number_of_bags = bags[target][bag]
+        total_contained += number_of_bags * count_individual_bags(bags, bag)
         
     return total_contained
 
